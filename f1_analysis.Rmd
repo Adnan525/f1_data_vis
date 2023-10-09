@@ -4,6 +4,9 @@ author: "Muntasir Adnan"
 date: "2023-10-09"
 output: pdf_document
 ---
+```{r}
+options(warn = -1)
+```
 
 ```{r}
 library(tidyverse)
@@ -59,11 +62,63 @@ circuits %>%
   select(circuitId)
 ```
 filtering all years that had monza
+Checking which year monza was missing
 ```{r}
 monza_gp <- races %>% 
   filter(circuitId == 14) %>% 
   select(year)
 setdiff(unique(races$year), monza_gp$year)
 ```
+2022 analysis
+```{r}
+f1_22_races <- races %>% 
+  filter(year == 2022)
+f1_22_races
+```
+2022 drivers' stanidings
+race 1096 has all accumulated values
+so last race of each season
+```{r}
+driver_standings <- read_csv("data/driver_standings.csv")
+drivers <- read.csv("data/drivers.csv")
+
+drivers <- drivers %>%
+  unite(driver_name, forename, surname, sep = " ")
+```
+```{r}
+f1_22_driver_standings <- driver_standings %>% 
+  filter(raceId == 1096) %>% 
+  inner_join(drivers, by = "driverId") %>% 
+  select(number, driver_name, points, wins) %>% 
+  arrange(desc(points))
+f1_22_driver_standings
+```
+```{r}
+library(ggplot2)
+f1_22_driver_standings$driver_name <- reorder(f1_22_driver_standings$driver_name, f1_22_driver_standings$points)
+
+ggplot(f1_22_driver_standings, 
+       aes(x = f1_22_driver_standings$points, 
+           y = f1_22_driver_standings$driver_name, fill = wins)) +
+       geom_bar(stat = "identity") +
+       labs(title = "2022 Drivers' Standings",
+          x = "Points",
+          y = "Driver Name",
+          fill = "Wins") +
+       theme(
+          text = element_text(color = "Black", family = "Formula1 Display-Regular"),
+          axis.text = element_text(color = "Black", size = 12, family = "Formula1 Display-Regular"),
+          axis.title = element_text(color = "Black", size = 15, family = "Formula1 Display-Regular"), 
+          title = element_text(size = 15, family = "Formula1 Display-Regular"),
+          panel.grid = element_blank(),
+          axis.ticks = element_blank(),
+          panel.background = element_rect(fill = "white"),
+          plot.background = element_rect(fill = "white"),
+          plot.title = element_text(hjust = 0.5),
+          axis.text.x = element_text(angle = 70,hjust = 1))+
+       scale_fill_gradient(low = "tomato", high = "darkred")
+
+```
+
 
 
