@@ -1,0 +1,26 @@
+---
+title: "f1_analysis"
+author: "Muntasir Adnan"
+date: "2023-10-09"
+output: pdf_document
+---
+
+```{r}
+library(tidyverse)
+library(sf)
+# had to install os pacakage libproj-dev
+# apt-get -y install libgdal-dev
+# sudo apt-get install libudunits2-dev
+library(mapview)
+```
+
+```{r}
+circuits <- read.csv("data/circuits.csv")
+constructors <- read.csv("data/constructors.csv")
+```
+
+```{r}
+
+```
+
+
