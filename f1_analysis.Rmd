@@ -1,0 +1,69 @@
+---
+title: "f1_analysis"
+author: "Muntasir Adnan"
+date: "2023-10-09"
+output: pdf_document
+---
+
+```{r}
+library(tidyverse)
+library(sf)
+# had to install os pacakage libproj-dev
+# apt-get -y install libgdal-dev
+# sudo apt-get install libudunits2-dev
+library(mapview)
+```
+
+```{r}
+circuits <- read.csv("data/circuits.csv")
+constructors <- read.csv("data/constructors.csv")
+```
+
+```{r}
+head(circuits)
+```
+```{r}
+mapview(circuits, 
+        xcol = "lng", 
+        ycol = "lat", 
+        crs = 4269, 
+        label = paste("Circuit name - ", circuits$name,", Location - ", circuits$location, ", ", circuits$country, sep = ""), 
+        # label = htmltools::HTML(paste(circuits$name, circuits$location, sep = '<br/>')),
+        grid = FALSE)
+```
+Analyse the circuits
+Starting with how many races those circuits had.
+```{r}
+races <- read.csv("data/races.csv")
+```
+inner join
+checking how many grand prix in each circuit and sorted in descending order
+```{r}
+races %>%
+  inner_join(circuits, by = "circuitId") %>% 
+  select(circuit_name, raceId, year, name) %>% 
+  count(circuit_name) %>% 
+  rename(count = n) %>%
+  arrange(desc(count))
+
+```
+In total there were 74 grand prix events
+```{r}
+length(unique(races$year))
+```
+1 grand prix did not have monza, lets check which one
+Check circuit id
+```{r}
+circuits %>% 
+  filter(circuit_name %in% "Autodromo Nazionale di Monza") %>% 
+  select(circuitId)
+```
+filtering all years that had monza
+```{r}
+monza_gp <- races %>% 
+  filter(circuitId == 14) %>% 
+  select(year)
+setdiff(unique(races$year), monza_gp$year)
+```
+
+
