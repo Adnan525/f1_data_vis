@@ -1,0 +1,109 @@
+---
+title: "Driver comparison"
+author: "Muntasir Adnan"
+date: "2023-10-11"
+output: pdf_document
+---
+```{r}
+library(tidyverse)
+options(warn = -1)
+```
+
+we are interested in 2022 season
+```{r}
+results <- read.csv("f1/data/results.csv")
+races <- read.csv("f1/data/races.csv")
+```
+selecting 2022
+```{r}
+races <- races %>% filter(year %in% c(2021, 2022)) %>% arrange(year)
+
+# race 1053-1073 1074-1096
+```
+select 2021, 2022 results
+```{r}
+results_2021 <- results %>% filter(raceId >= 1052 & raceId <= 1073)
+results_2022 <- results %>% filter(raceId >= 1074 & raceId <= 1096)
+rm(results, races)
+```
+in 2021 season we have 2 rookies mick and yuki
+mick = 854
+yuki = 852
+```{r}
+# mick shchumacher
+results_2021 %>% 
+  filter(driverId == 854) %>% 
+  summarise(total_points = sum(points), highest_position = min(positionOrder))
+```
+```{r}
+# yuki tsunoda
+results_2021 %>% 
+  filter(driverId == 852) %>% 
+  summarise(total_points = sum(points), highest_position = min(positionOrder))
+```
+# direct compare between mick and yuki's position
+```{r}
+# apt install libxtst6 libxt6
+yuki_positions <- results_2021 %>%
+  filter(driverId == 852) %>%
+  pull(positionOrder)
+mick_positions <- results_2021 %>%
+  filter(driverId == 854) %>%
+  pull(positionOrder)
+raceId <- unique(results_2021$raceId)
+# plot(as.numeric(factor(race_2021)), yuki_positions, type = "o", col = "blue", pch = 15, xlab = "Race ID", ylab = "Position Order", main = "Position comparison between Yuki and Mick in 2021")
+# 
+# points(as.numeric(factor(race_2021)), mick_positions, col = "red", type = "o", pch = 15)
+# 
+# unique_labels <- levels(factor(race_2021))
+# axis(1, at = 1:length(unique_labels), labels = unique_labels, las = 2)
+# 
+# legend("topright", legend = c("Yuki", "Mick"), col = c("blue", "red"), pch = 15, title = "Driver")
+
+
+```
+ggplot
+```{r}
+races <- read.csv("f1/data/races.csv")
+names(races)[5] <- "race_name"
+target <- data.frame(raceId, yuki_positions, mick_positions)
+target <- target %>% 
+  inner_join(races, by = "raceId") %>% 
+  select(raceId, race_name, yuki_positions, mick_positions)
+```
+ggplot
+```{r}
+ggplot(target, aes(x = as.factor(race_name))) +
+  geom_line(aes(y = target$yuki_positions, color = "Yuki", group = 1), show.legend = TRUE) +
+  geom_line(aes(y = target$mick_positions, color = "Mick", group = 1), show.legend = TRUE) +
+  geom_point(aes(y = target$yuki_position, color = "Yuki"), shape = 15, size = 3) +
+  geom_point(aes(y = target$mick_positions, color = "Mick"), shape = 15, size = 3) +
+  scale_color_manual(values = c("Yuki" = "blue", "Mick" = "red")) +
+  labs(x = "Races", y = "Position Order", title = "Position comparison between Yuki and Mick in 2021") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+dnfs
+```{r}
+
+yuki_status <- results_2021 %>% 
+  filter(driverId == 852) %>% 
+  pull(statusId)
+mick_status <- results_2021 %>% 
+  filter(driverId == 854) %>% 
+  pull(statusId)
+target$yuki_status <- yuki_status
+target$mick_status <- mick_status
+```
+```{r}
+merged_df <- merge(target, status, by.x = "yuki_status", by.y = "statusId", all.x = TRUE)
+colnames(merged_df)[7] <- "yuki_status_desc"
+```
+```{r}
+merged_df <- merge(merged_df, status, by.x = "mick_status", by.y = "statusId", all.x = TRUE)
+colnames(merged_df)[8] <- "mick_status_desc"
+```
+
+
+
