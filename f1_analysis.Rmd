@@ -39,6 +39,10 @@ Starting with how many races those circuits had.
 ```{r}
 races <- read.csv("data/races.csv")
 ```
+change name to circuit_name in circuits
+```{r}
+names(circuits)[3] <- "circuit_name"
+```
 inner join
 checking how many grand prix in each circuit and sorted in descending order
 ```{r}
@@ -48,7 +52,6 @@ races %>%
   count(circuit_name) %>% 
   rename(count = n) %>%
   arrange(desc(count))
-
 ```
 In total there were 74 grand prix events
 ```{r}
