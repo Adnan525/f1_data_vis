@@ -11,8 +11,8 @@ options(warn = -1)
 
 we are interested in 2022 season
 ```{r}
-results <- read.csv("f1/data/results.csv")
-races <- read.csv("f1/data/races.csv")
+results <- read.csv("data/results.csv")
+races <- read.csv("data/races.csv")
 ```
 selecting 2022
 ```{r}
@@ -64,7 +64,7 @@ raceId <- unique(results_2021$raceId)
 ```
 ggplot
 ```{r}
-races <- read.csv("f1/data/races.csv")
+races <- read.csv("data/races.csv")
 names(races)[5] <- "race_name"
 target <- data.frame(raceId, yuki_positions, mick_positions)
 target <- target %>% 
@@ -96,6 +96,10 @@ mick_status <- results_2021 %>%
 target$yuki_status <- yuki_status
 target$mick_status <- mick_status
 ```
+```{r}
+status <- read.csv("data/status.csv")
+```
+
 ```{r}
 merged_df <- merge(target, status, by.x = "yuki_status", by.y = "statusId", all.x = TRUE)
 colnames(merged_df)[7] <- "yuki_status_desc"
