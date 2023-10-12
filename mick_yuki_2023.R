@@ -13,6 +13,16 @@ mick <- results_2022 %>% filter(driverId == 854) %>% select(raceId, driverId, po
 yuki <- results_2022 %>% filter(driverId == 852) %>% select(raceId, driverId, positionOrder, points, fastestLapTime, statusId)
 
 
+#point
+driver <- c("zhou", "mick", "yuki")
+point <- c(sum(zhou$points), sum(mick$points), sum(yuki$points))
+point_compare <- data.frame(driver, point)
+ggplot(point_compare, aes(x = driver, y = point, fill = driver)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Drivers' Points", x = "Driver", y = "Points") +
+  theme_minimal()
+
+# position
 ggplot(zhou, aes(x = as.factor(raceId)))+
   #zhou
   geom_line(aes(y = positionOrder, group = 1, color = "zhou"))+
