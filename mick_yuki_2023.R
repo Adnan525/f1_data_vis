@@ -37,5 +37,33 @@ ggplot(zhou, aes(x = as.factor(raceId)))+
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
+# status
+status <- read.csv("data/status.csv")
+mick_status <- merge(mick, status, by.x = "statusId", by.y = "statusId", all.x = TRUE)
+zhou_status <- merge(zhou, status, by.x = "statusId", by.y = "statusId", all.x = TRUE)
 
-# point comparison
+
+convert_time_string <- function(time_str) {
+  time_parts <- unlist(strsplit(time_str, "[:\\.]"))
+  minutes <- as.integer(time_parts[1])
+  seconds <- as.integer(time_parts[2])
+  milliseconds <- as.integer(time_parts[3])
+  total_seconds <- minutes * 60 + seconds + milliseconds / 1000
+  return(total_seconds)
+}
+
+lap_time_compare <- zhou %>% select(raceId)
+lap_time_compare$zhou <- sapply(zhou$fastestLapTime, convert_time_string)
+lap_time_compare$mick <- sapply(mick$fastestLapTime, convert_time_string)
+
+lap_time_compare <- na.omit(lap_time_compare)
+
+ggplot(lap_time_compare, aes(x = as.factor(raceId)))+
+  geom_point(aes(y = mick, color = "mick"), shape = 15, size = 2)+
+  geom_line(aes(y = mick, color = "mick", group = 1))+
+  geom_point(aes(y = zhou, color = "zhou"), shape = 15, size = 2)+
+  geom_line(aes(y = zhou, color = "zhou", group = 1))+
+  scale_color_manual(values = c("mick" = "red", "zhou" = "blue"))+
+  labs(title = "Zhou vs Mick quickest lap time")+
+  theme_minimal()+
+  theme(axis.text.x = element_text(angle = 90))
