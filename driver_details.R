@@ -65,3 +65,13 @@ team_wise_podium <- target_driver_df %>%
   mutate(podium_bin = ifelse(position <= 3, 1, 0)) %>% 
   group_by(constructor_name) %>% 
   summarise(podium_by_team = sum(podium_bin))
+total_points <- target_driver_df %>% 
+  group_by(year) %>% 
+  summarise(points_by_year = max(points)) %>% 
+  summarise(total_points = sum(points_by_year)) %>% 
+  pull(total_points)
+team_wise_point <- target_driver_df %>% 
+  group_by(constructor_name, year) %>% 
+  summarise(point_by_year = max(points)) %>% 
+  group_by(constructor_name) %>% 
+  summarise(point_by_team = sum(point_by_year))
