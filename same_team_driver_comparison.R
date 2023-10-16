@@ -35,6 +35,31 @@ position_df_2021 <- position_df_2021 %>%
   inner_join(races, by = "raceId") %>% 
   select(raceId, race_name, yuki_positions, gasly_positions, mick_positions, nikita_positions)
 
+# domination
+
+# alphatauri <- alphatauri %>% 
+#   left_join(races, by = "raceId", keep = FALSE) %>% 
+#   rename(time = time.x) %>% 
+#   select(race_name, names(alphatauri))
+alphatauri_dominate_driver_df_2021 <- alphatauri %>% 
+  inner_join(races, by = "raceId") %>% 
+  mutate(driver_name = ifelse(driverId == gasly_id, "Pierre Gasly", "Yuki Tsunoda")) %>% 
+  group_by(raceId) %>% 
+  filter(positionOrder == min(positionOrder)) %>% 
+  select(raceId, driver_name)
+alphatauri_dominate_driver_df_2021 <- data.frame(table(alphatauri_dominate_driver_df_2021$driver_name))
+
+haas_dominate_driver_df_2021 <- haas %>% 
+  inner_join(races, by = "raceId") %>% 
+  mutate(driver_name = ifelse(driverId == mick_id, "Mick Schumacher", "Nikita Mazepin")) %>% 
+  group_by(raceId) %>% 
+  filter(positionOrder == min(positionOrder)) %>% 
+  select(raceId, driver_name)
+haas_dominate_driver_df_2021 <- data.frame(table(haas_dominate_driver_df_2021$driver_name))
+
+
+
+
 # ALPHATAURI
 
 # position
@@ -47,6 +72,25 @@ ggplot(position_df_2021, aes(x = as.factor(race_name))) +
   labs(x = "Races", y = "Position Order", title = "Position comparison between Scuderia Alphatauri drivers") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+# points
+ggplot(alphatauri_point_df_2021, 
+       aes(x = total_points, 
+           y = driverId, 
+           fill = "Red")) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  labs(title = "Alphatauri Driver Standings", x = "Points", y = "Driver Name")+
+  scale_fill_manual(values = c("Red" = "red"))+
+  theme_minimal() +
+  theme(panel.background = element_rect(fill = "white"))
+
+# dominate
+ggplot(alphatauri_dominate_driver_df_2021, aes(x = Var1, y = Freq, fill = "Red"))+
+  geom_bar(stat = "identity", show.legend = FALSE)+
+  labs(title = "Alphatauri dominate driver", x = "Driver Name", y = "Frequency")+
+  scale_fill_manual(values = c("Red" = "red"))+
+  theme_minimal() +
+  theme(panel.background = element_rect(fill = "white"))
 
 
 
@@ -63,4 +107,21 @@ ggplot(position_df_2021, aes(x = as.factor(race_name))) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
+# points
+ggplot(haas_point_df_2021, 
+       aes(x = total_points, 
+           y = driverId, 
+           fill = "Red")) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  labs(title = "Haas Driver Standings", x = "Points", y = "Driver Name")+
+  scale_fill_manual(values = c("Red" = "red"))+
+  theme_minimal() +
+  theme(panel.background = element_rect(fill = "white"))
 
+# dominate
+ggplot(haas_dominate_driver_df_2021, aes(x = Var1, y = Freq, fill = "Red"))+
+  geom_bar(stat = "identity", show.legend = FALSE)+
+  labs(title = "Haas dominate driver", x = "Driver Name", y = "Frequency")+
+  scale_fill_manual(values = c("Red" = "red"))+
+  theme_minimal() +
+  theme(panel.background = element_rect(fill = "white"))
