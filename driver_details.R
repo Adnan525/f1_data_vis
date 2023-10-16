@@ -49,3 +49,8 @@ total_win <- target_driver_df %>%
   summarise(win_by_year = max(wins)) %>% 
   summarise(total_win = sum(win_by_year)) %>% 
   pull(total_win)
+team_wise_win <- target_driver_df %>% 
+  group_by(constructor_name, year) %>% 
+  summarise(total_win = max(wins)) %>% 
+  group_by(constructor_name) %>% 
+  summarise(win_by_team = sum(total_win))
