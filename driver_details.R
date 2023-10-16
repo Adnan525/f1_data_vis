@@ -18,10 +18,10 @@ target <- driver_standings %>%
   # select(-driverStandingsId) %>% 
   inner_join(drivers, by = "driverId") %>% 
   select(driver_name, names(driver_standings))
-
+# DRIVER STANDINGS POSITION IS NOT SAME AS RESULTS POSITION
 target <- target %>% 
   inner_join(results, by = c("raceId", "driverId")) %>% 
-  rename(points = points.x, position = position.x, positionText = positionText.x)%>% 
+  rename(points = points.x, position = positionOrder, positionText = positionText.y)%>% 
   select(constructorId, names(target))
 
 target <- target %>% 
@@ -54,3 +54,10 @@ team_wise_win <- target_driver_df %>%
   summarise(total_win = max(wins)) %>% 
   group_by(constructor_name) %>% 
   summarise(win_by_team = sum(total_win))
+
+# DRIVER STANDINGS POSITION IS NOT SAME AS RESULTS POSITION
+total_podium <- target_driver_df %>% 
+  mutate(podium_bin = ifelse(position <= 3, 1, 0)) %>% 
+  filter(podium_bin == 1)
+  # summarise(total_podium = sum(podium_bin)) %>% 
+  # pull(total_podium)
