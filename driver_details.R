@@ -58,6 +58,10 @@ team_wise_win <- target_driver_df %>%
 # DRIVER STANDINGS POSITION IS NOT SAME AS RESULTS POSITION
 total_podium <- target_driver_df %>% 
   mutate(podium_bin = ifelse(position <= 3, 1, 0)) %>% 
-  filter(podium_bin == 1)
-  # summarise(total_podium = sum(podium_bin)) %>% 
-  # pull(total_podium)
+  # filter(podium_bin == 1)
+  summarise(total_podium = sum(podium_bin)) %>%
+  pull(total_podium)
+team_wise_podium <- target_driver_df %>% 
+  mutate(podium_bin = ifelse(position <= 3, 1, 0)) %>% 
+  group_by(constructor_name) %>% 
+  summarise(podium_by_team = sum(podium_bin))
