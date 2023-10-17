@@ -1,0 +1,78 @@
+"circuit_name","circuitRef","location","lat","lng","fastestLapTime_inSeconds","driverRef","constructorRef","year"
+"Albert Park Grand Prix Circuit","albert_park","Melbourne",-37.8497,144.968,80.235,"perez","red_bull",2023
+"Sepang International Circuit","sepang","Kuala Lumpur",2.76083,101.738,94.08,"vettel","ferrari",2017
+"Bahrain International Circuit","bahrain","Sakhir",26.0325,50.5106,55.404,"russell","mercedes",2020
+"Circuit de Barcelona-Catalunya","catalunya","Montmeló",41.57,2.26111,75.641,"fisichella","renault",2005
+"Istanbul Park","istanbul","Istanbul",40.9517,29.405,84.77,"montoya","mclaren",2005
+"Circuit de Monaco","monaco","Monte-Carlo",43.7347,7.42056,72.909,"hamilton","mercedes",2021
+"Circuit Gilles Villeneuve","villeneuve","Montreal",45.5,-73.5228,73.078,"bottas","mercedes",2019
+"Circuit de Nevers Magny-Cours","magny_cours","Magny Cours",46.8642,3.16361,75.377,"michael_schumacher","ferrari",2004
+"Silverstone Circuit","silverstone","Silverstone",52.0786,-1.01694,78.739,"michael_schumacher","ferrari",2004
+"Hockenheimring","hockenheimring","Hockenheim",49.3278,8.56583,73.78,"raikkonen","mclaren",2004
+"Hungaroring","hungaroring","Budapest",47.5789,19.2486,76.627,"hamilton","mercedes",2020
+"Valencia Street Circuit","valencia","Valencia",39.4589,-0.331667,98.683,"glock","toyota",2009
+"Circuit de Spa-Francorchamps","spa","Spa",50.4372,5.97139,105.108,"raikkonen","mclaren",2004
+"Autodromo Nazionale di Monza","monza","Monza",45.6156,9.28111,81.046,"barrichello","ferrari",2004
+"Marina Bay Street Circuit","marina_bay","Marina Bay",1.2914,103.864,101.905,"kevin_magnussen","haas",2018
+"Fuji Speedway","fuji","Oyama",35.3717,138.927,78.426,"massa","ferrari",2008
+"Shanghai International Circuit","shanghai","Shanghai",31.3389,121.22,92.238,"michael_schumacher","ferrari",2004
+"Autódromo José Carlos Pace","interlagos","São Paulo",-23.7036,-46.6997,70.54,"bottas","mercedes",2018
+"Indianapolis Motor Speedway","indianapolis","Indianapolis",39.795,-86.2347,70.399,"barrichello","ferrari",2004
+"Nürburgring","nurburgring","Nürburg",50.3356,6.9475,88.139,"max_verstappen","red_bull",2020
+"Autodromo Enzo e Dino Ferrari","imola","Imola",44.3439,11.7167,75.484,"hamilton","mercedes",2020
+"Suzuka Circuit","suzuka","Suzuka",34.8431,136.541,90.983,"hamilton","mercedes",2019
+"Las Vegas Strip Street Circuit","vegas","Las Vegas",36.1147,-115.173,NA,NA,NA,NA
+"Yas Marina Circuit","yas_marina","Abu Dhabi",24.4672,54.6031,86.103,"max_verstappen","red_bull",2021
+"Autódromo Juan y Oscar Gálvez","galvez","Buenos Aires",-34.6943,-58.4593,NA,NA,NA,NA
+"Circuito de Jerez","jerez","Jerez de la Frontera",36.7083,-6.03417,NA,NA,NA,NA
+"Autódromo do Estoril","estoril","Estoril",38.7506,-9.39417,NA,NA,NA,NA
+"Okayama International Circuit","okayama","Okayama",34.915,134.221,NA,NA,NA,NA
+"Adelaide Street Circuit","adelaide","Adelaide",-34.9272,138.617,NA,NA,NA,NA
+"Kyalami","kyalami","Midrand",-25.9894,28.0767,NA,NA,NA,NA
+"Donington Park","donington","Castle Donington",52.8306,-1.37528,NA,NA,NA,NA
+"Autódromo Hermanos Rodríguez","rodriguez","Mexico City",19.4042,-99.0907,77.774,"bottas","mercedes",2021
+"Phoenix street circuit","phoenix","Phoenix",33.4479,-112.075,NA,NA,NA,NA
+"Circuit Paul Ricard","ricard","Le Castellet",43.2506,5.79167,92.74,"vettel","ferrari",2019
+"Korean International Circuit","yeongam","Yeongam County",34.7333,126.417,99.605,"vettel","red_bull",2011
+"Autódromo Internacional Nelson Piquet","jacarepagua","Rio de Janeiro",-22.9756,-43.395,NA,NA,NA,NA
+"Detroit Street Circuit","detroit","Detroit",42.3298,-83.0401,NA,NA,NA,NA
+"Brands Hatch","brands_hatch","Kent",51.3569,0.263056,NA,NA,NA,NA
+"Circuit Park Zandvoort","zandvoort","Zandvoort",52.3888,4.54092,71.097,"hamilton","mercedes",2021
+"Zolder","zolder","Heusden-Zolder",50.9894,5.25694,NA,NA,NA,NA
+"Dijon-Prenois","dijon","Dijon",47.3625,4.89913,NA,NA,NA,NA
+"Fair Park","dallas","Dallas",32.7774,-96.7587,NA,NA,NA,NA
+"Long Beach","long_beach","California",33.7651,-118.189,NA,NA,NA,NA
+"Las Vegas Street Circuit","las_vegas","Nevada",36.1162,-115.174,NA,NA,NA,NA
+"Jarama","jarama","Madrid",40.6171,-3.58558,NA,NA,NA,NA
+"Watkins Glen","watkins_glen","New York State",42.3369,-76.9272,NA,NA,NA,NA
+"Scandinavian Raceway","anderstorp","Anderstorp",57.2653,13.6042,NA,NA,NA,NA
+"Mosport International Raceway","mosport","Ontario",44.0481,-78.6756,NA,NA,NA,NA
+"Montjuïc","montjuic","Barcelona",41.3664,2.15167,NA,NA,NA,NA
+"Nivelles-Baulers","nivelles","Brussels",50.6211,4.32694,NA,NA,NA,NA
+"Charade Circuit","charade","Clermont-Ferrand",45.7472,3.03889,NA,NA,NA,NA
+"Circuit Mont-Tremblant","tremblant","Quebec",46.1877,-74.6099,NA,NA,NA,NA
+"Rouen-Les-Essarts","essarts","Rouen",49.3306,1.00458,NA,NA,NA,NA
+"Le Mans","lemans","Le Mans",47.95,0.224231,NA,NA,NA,NA
+"Reims-Gueux","reims","Reims",49.2542,3.93083,NA,NA,NA,NA
+"Prince George Circuit","george","Eastern Cape Province",-33.0486,27.8736,NA,NA,NA,NA
+"Zeltweg","zeltweg","Styria",47.2039,14.7478,NA,NA,NA,NA
+"Aintree","aintree","Liverpool",53.4769,-2.94056,NA,NA,NA,NA
+"Circuito da Boavista","boavista","Oporto",41.1705,-8.67325,NA,NA,NA,NA
+"Riverside International Raceway","riverside","California",33.937,-117.273,NA,NA,NA,NA
+"AVUS","avus","Berlin",52.4806,13.2514,NA,NA,NA,NA
+"Monsanto Park Circuit","monsanto","Lisbon",38.7197,-9.20306,NA,NA,NA,NA
+"Sebring International Raceway","sebring","Florida",27.4547,-81.3483,NA,NA,NA,NA
+"Ain Diab","ain-diab","Casablanca",33.5786,-7.6875,NA,NA,NA,NA
+"Pescara Circuit","pescara","Pescara",42.475,14.1508,NA,NA,NA,NA
+"Circuit Bremgarten","bremgarten","Bern",46.9589,7.40194,NA,NA,NA,NA
+"Circuit de Pedralbes","pedralbes","Barcelona",41.3903,2.11667,NA,NA,NA,NA
+"Buddh International Circuit","buddh","Uttar Pradesh",28.3487,77.5331,87.249,"vettel","red_bull",2011
+"Circuit of the Americas","americas","Austin",30.1328,-97.6411,96.169,"leclerc","ferrari",2019
+"Red Bull Ring","red_bull_ring","Spielberg",47.2197,14.7647,65.619,"sainz","mclaren",2020
+"Sochi Autodrom","sochi","Sochi",43.4057,39.9578,95.761,"hamilton","mercedes",2019
+"Baku City Circuit","baku","Baku",40.3725,49.8533,103.009,"leclerc","ferrari",2019
+"Autódromo Internacional do Algarve","portimao","Portimão",37.227,-8.6267,78.75,"hamilton","mercedes",2020
+"Autodromo Internazionale del Mugello","mugello","Mugello",43.9975,11.3719,78.833,"hamilton","mercedes",2020
+"Jeddah Corniche Circuit","jeddah","Jeddah",21.6319,39.1044,90.734,"hamilton","mercedes",2021
+"Losail International Circuit","losail","Al Daayen",25.49,51.4542,83.196,"max_verstappen","red_bull",2021
+"Miami International Autodrome","miami","Miami",25.9581,-80.2389,89.708,"max_verstappen","red_bull",2023
