@@ -32,6 +32,15 @@ target <- target %>%
   inner_join(races, by = "raceId") %>% 
   select(year, race_name, names(target))
 
+# championship_df
+championship_df <- target %>% group_by(year) %>% 
+  filter(points == max(points)) %>%
+  arrange(year) %>% 
+  select(year, constructor_name, driver_name, points)
+
+# EXPORTING CSV FOR SHINY
+write.csv(target, file = "data/driver_standings_updated.csv", row.names = FALSE)
+write.csv(championship_df, file = "data/championship_df.csv", row.names = FALSE)
 
 # test
 # we want to know about Valtteri Bottas
@@ -87,9 +96,5 @@ team_wise_point <- target_driver_df %>%
   summarise(point_by_team = sum(point_by_year))
 
 # championship_count
-championship_df <- target %>% group_by(year) %>% 
-  filter(points == max(points)) %>%
-  arrange(year) %>% 
-  select(year, constructor_name, driver_name, points)
 temp <- table(championship_df$driver_name)
 target_driver_championship <- ifelse(target_driver %in% temp, temp[target_driver], 0)
