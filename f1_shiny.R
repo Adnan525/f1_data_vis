@@ -25,7 +25,8 @@ ui <- fluidPage(
       img(src = "dataset-cover.jpg", height = 140, width = 800),
       textOutput("selected_text"),
       conditionalPanel(
-        condition = "!is.na(input.circuit_search)",
+        # condition = "!is.na(input.circuit_search) && input.circuit_search !== null",
+        condition = "input.topics == 'Circuits'",
         leafletOutput("map", width = "50%", height = "300px")
       )
     )
