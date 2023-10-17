@@ -1,18 +1,14 @@
 library(shiny)
 library(sf)
 library(mapview)
-
-# get_driver_details function
-source("get_driver_details.R")
+library(leaflet)
 
 # dataset
 circuits <- read.csv("data/circuits.csv")
 names(circuits)[3] <- "circuit_name"
-driver_standings <- read.csv("data/driver_standings_updated.csv")
 
 # variables
 circuit_options_vector <- unique(circuits$circuit_name)
-drivers_vector <- unique(driver_standings$driver_name)
 
 # shiny
 ui <- fluidPage(
@@ -24,14 +20,10 @@ ui <- fluidPage(
         condition = "input.topics == 'Circuits'",
         selectizeInput("circuit_search", label = "Select a circuit", choices = circuit_options_vector, multiple = FALSE)
       ),
-      conditionalPanel(
-        condition = "input.topics == 'Drivers'",
-        selectizeInput("driver_search", label = "Select a driver", choices = drivers_vector, multiple = FALSE)
-      )
     ),
     mainPanel(
       img(src = "dataset-cover.jpg", height = 140, width = 800),
-      textOutput("selected_text")
+      leafletOutput("map", width = "50%", height = "300px")
     )
   )
 )
@@ -42,11 +34,8 @@ server <- function(input, output) {
   observeEvent(input$circuit_search, {
     selected_item(input$circuit_search)
   })
-  observeEvent(input$driver_search, {
-    selected_item(input$driver_search)
-  })
 
-  output$selected_text <- renderTable({
+  output$selected_text <- renderText({
     selected <- selected_item()
     if (input$topics == "Circuits") {
       if (!is.null(selected)) {
@@ -54,15 +43,14 @@ server <- function(input, output) {
       } else {
         "Please select a circuit."
       }
-    } else if (input$topics == "Drivers") {
-      if (!is.null(selected)) {
-        driver_details <- get_driver_details(selected, 2023)
-        str(driver_details)
-      } else {
-        "Please select a driver."
-      }
     }
   })
+  output$map <- renderLeaflet(
+    leaflet() %>%
+      setView(lng = 144.968000, lat = -37.84970, zoom = 13) %>%
+      addTiles() %>%
+      addMarkers(lng = 144.968000, lat = -37.84970, label = "Point") 
+  )
 }
 
 shinyApp(ui, server)
