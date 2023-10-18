@@ -2,6 +2,8 @@ library(shiny)
 library(sf)
 library(DT)
 library(leaflet)
+library(tidyverse)
+
 # Load the get_driver_details function
 source("get_driver_details.R")
 
@@ -18,6 +20,7 @@ ui <- fluidPage(
   titlePanel("F1 Analysis"),
   sidebarLayout(
     sidebarPanel(
+      width = 3,
       selectInput("topics", label = "Topics", choices = c("Please select a topic", "Circuits", "Drivers")),
       conditionalPanel(
         condition = "input.topics == 'Circuits'",
@@ -29,7 +32,8 @@ ui <- fluidPage(
       )
     ),
     mainPanel(
-      img(src = "dataset-cover.jpg", height = 140, width = 600),
+      width = 8,
+      img(src = "dataset-cover.jpg", height = 140, width = 800),
       uiOutput("space"),
       conditionalPanel(
         # condition = "!is.na(input.circuit_search) && input.circuit_search !== null",
