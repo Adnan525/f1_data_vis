@@ -1,4 +1,4 @@
-# Analysis on why Mich Schumacher was axed from Haas F1 on 2023 and replace by Nico Hulkenberg
+# Analysis on why Mich Schumacher was axed from Haas F1 on 2023 and replaced by Nico Hulkenberg
 
 -   3 rooikes in the seson - Mick, Yuki, Nikita
 -   Driver standings yuki and mick

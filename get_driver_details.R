@@ -4,7 +4,7 @@ get_driver_details <- function(target_driver, current_year){
   championship_df <- read.csv("data/championship_df.csv")
   
   # get filtered df for target driver
-  target_driver_df <- target %>% filter(driver_name == target_driver) %>% arrange(year)
+  target_driver_df <- driver_standings %>% filter(driver_name == target_driver) %>% arrange(year)
   
   
   target_driver_appearance <- dim(target_driver_df)[1]
@@ -55,7 +55,7 @@ get_driver_details <- function(target_driver, current_year){
   
   # championship_count
   temp <- table(championship_df$driver_name)
-  target_driver_championship <- ifelse(target_driver %in% temp, temp[target_driver], 0)
+  target_driver_championship <- ifelse(target_driver %in% championship_df$driver_name, temp[target_driver], 0)
   
   # adding values
   driver_details <-list(
