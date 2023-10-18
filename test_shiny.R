@@ -28,22 +28,16 @@ ui <- fluidPage(
         selectizeInput("driver_search", label = "Select a driver", choices = drivers_vector, multiple = FALSE)
       )
     ),
-    # mainPanel(
-    #   img(src = "dataset-cover.jpg", height = 140, width = 600),
-    #   uiOutput("driver_details_text"),
-    #   DTOutput("win_by_team_table"),     # Display win_by_team as a table
-    #   uiOutput("career_podium_text"),
-    #   DTOutput("podium_by_team_table"),
-    #   uiOutput("career_point_text"),
-    #   DTOutput("points_by_team_table")
-    # )
     mainPanel(
       img(src = "dataset-cover.jpg", height = 140, width = 600),
       uiOutput("space"),
       conditionalPanel(
         # condition = "!is.na(input.circuit_search) && input.circuit_search !== null",
         condition = "input.topics == 'Circuits'",
-        leafletOutput("map", width = "50%", height = "300px"),
+        conditionalPanel(
+          condition = "!input.circuit_search == ''",
+          leafletOutput("map", width = "50%", height = "300px")
+        ),
         uiOutput("selected_text")
       ),
       # driver
