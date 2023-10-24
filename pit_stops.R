@@ -42,3 +42,34 @@ ggplot(temp, aes(x = as.factor(year), y = fastest_pit, group = 1)) +
   labs(x = "Year", y = "Pit-time") +
   scale_color_manual(values = c("Fastest Pit Time" = "blue", "Adjusted Time" = "red"))+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+# Create a data frame to specify the color and legend title
+color_data <- data.frame(
+  year_range = c("before 2014", "2014-2021", "after 2021", "Adjusted Time"),
+  color = c("red", "green", "blue", "black"),
+  legend_title = c("100 KMH", "80 KMH", "60 KMH", "Adjusted Time")
+)
+
+# Add a 'year_range' column to your 'temp' data frame based on the year
+temp$year_range <- cut(
+  temp$year,
+  breaks = c(-Inf, 2013.99, 2020.99, Inf),
+  labels = c("before 2014", "2014-2021", "after 2021")
+)
+
+# Plot using ggplot2
+library(ggplot2)
+
+ggplot(temp, aes(x = as.factor(year), group = 1)) +
+  geom_line(aes(y = fastest_pit, color = year_range)) +
+  geom_line(data = temp, aes(x = as.factor(year), y = adj_time, color = "Adjusted Time")) +
+  labs(x = "Year", y = "Pit-time") +
+  scale_color_manual(
+    values = color_data$color,
+    breaks = color_data$year_range,
+    labels = color_data$legend_title,
+    name = "pit_lane_limit"
+  ) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)
+  )
