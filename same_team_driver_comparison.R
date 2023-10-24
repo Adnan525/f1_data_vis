@@ -84,10 +84,31 @@ ggplot(alphatauri_point_df_2021,
   theme_minimal() +
   theme(panel.background = element_rect(fill = "white"))
 
+# points pie chart
+
+# Calculate the total points for the two drivers
+total_points <- sum(alphatauri_point_df_2021$total_points)
+
+# Create a data frame for the pie chart
+pie_data <- data.frame(
+  Driver = c("Pierre Gasly", "Yuki Tsunoda"),
+  Points = c(
+    alphatauri_point_df_2021$total_points[1],
+    alphatauri_point_df_2021$total_points[2])
+)
+
+ggplot(pie_data, aes(x = "", y = Points, fill = Driver)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  labs(title = "Alphatauri Drivers' Points Contribution 2021", fill = "Driver") +
+  scale_fill_manual(values = c("Pierre Gasly" = "red", "Yuki Tsunoda" = "blue", "Other" = "gray")) +
+  theme_void()
+
+
 # dominate
 ggplot(alphatauri_dominate_driver_df_2021, aes(x = Var1, y = Freq, fill = "Red"))+
   geom_bar(stat = "identity", show.legend = FALSE)+
-  labs(title = "Alphatauri dominate driver", x = "Driver Name", y = "Frequency")+
+  labs(title = "Alphatauri dominate driver 2021", x = "Driver Name", y = "Frequency")+
   scale_fill_manual(values = c("Red" = "red"))+
   theme_minimal() +
   theme(panel.background = element_rect(fill = "white"))
@@ -113,7 +134,7 @@ ggplot(haas_point_df_2021,
            y = driverId, 
            fill = "Red")) +
   geom_bar(stat = "identity", show.legend = FALSE) +
-  labs(title = "Haas Driver Standings", x = "Points", y = "Driver Name")+
+  labs(title = "Haas Driver Standings 2021", x = "Points", y = "Driver Name")+
   scale_fill_manual(values = c("Red" = "red"))+
   theme_minimal() +
   theme(panel.background = element_rect(fill = "white"))
@@ -121,7 +142,7 @@ ggplot(haas_point_df_2021,
 # dominate
 ggplot(haas_dominate_driver_df_2021, aes(x = Var1, y = Freq, fill = "Red"))+
   geom_bar(stat = "identity", show.legend = FALSE)+
-  labs(title = "Haas dominate driver", x = "Driver Name", y = "Frequency")+
+  labs(title = "Haas dominate driver 2021", x = "Driver Name", y = "Frequency")+
   scale_fill_manual(values = c("Red" = "red"))+
   theme_minimal() +
   theme(panel.background = element_rect(fill = "white"))

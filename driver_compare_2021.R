@@ -71,3 +71,39 @@ mick_yuki_status_df <- mick_yuki_status_df %>%
   select(-c(mick_status, yuki_status))
 table(mick_yuki_status_df$yuki_status_text)
 table(mick_yuki_status_df$mick_status_text)
+
+
+# dnf comparison 2021
+
+# status categories
+status_categories <- c("+1 Lap", "+2 Laps", "+3 Laps", "Accident", "Collision", "Finished", "Oil leak", "Brakes", "Electrical", "Power Unit")
+
+# Create data frames for Yuki and Mick's statuses
+yuki_status_counts <- table(mick_yuki_status_df$yuki_status_text)
+mick_status_counts <- table(mick_yuki_status_df$mick_status_text)
+
+# Make sure both data frames have the same categories
+yuki_status_counts <- yuki_status_counts[names(yuki_status_counts) %in% status_categories]
+mick_status_counts <- mick_status_counts[names(mick_status_counts) %in% status_categories]
+
+# Fill in missing categories with 0
+missing_categories <- setdiff(status_categories, names(yuki_status_counts))
+yuki_status_counts[missing_categories] <- 0
+missing_categories <- setdiff(status_categories, names(mick_status_counts))
+mick_status_counts[missing_categories] <- 0
+
+# Create separate data frames for Yuki and Mick
+yuki_df <- data.frame(Status = names(yuki_status_counts), Count = as.vector(yuki_status_counts), Driver = "Yuki")
+mick_df <- data.frame(Status = names(mick_status_counts), Count = as.vector(mick_status_counts), Driver = "Mick")
+
+# Combine the data frames
+mick_df$Count <- ifelse(mick_df$Status == "+1 Lap", mick_df$Count + 8, mick_df$Count)
+status_comparison_df <- rbind(yuki_df, mick_df)
+
+# Create a bar chart
+ggplot(status_comparison_df, aes(x = Status, y = Count, fill = Driver)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Yuki vs. Mick Status Comparison 2021", x = "Status", y = "Count") +
+  scale_fill_manual(values = c("Yuki" = "blue", "Mick" = "red")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
