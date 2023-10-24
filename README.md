@@ -9,5 +9,9 @@
 -   Analysing pierre gasly's profile shows us dominate driver comparison is not fair
 -   2021 position compare yuki and mick
 -   2021 status compare mick and yuki
--   2021 lap time compare mick and yuki
+-   2022 position compare mick, yuki, zhou
+-   2022 dominate driver among mick, yuki, zhou
+-   2022 mick vs zhou lap time
+-   2022 status
+-   3rd party accidental cost
 
